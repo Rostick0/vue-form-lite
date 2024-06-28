@@ -36,7 +36,7 @@ export default <T extends { [key in keyof any]: any }>({
     return async (e: Event): Promise<void> => {
       e.preventDefault();
 
-      if (isEmpty(state.value)) {
+      if (isEmpty(errors.value)) {
         successFunction(state.value);
         return;
       }

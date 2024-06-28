@@ -34,6 +34,6 @@ const onSubmit = handleSubmit(async (val: IPost) => {
 <form class="todo-mutation" @submit="onSubmit" method="post">
     <input v-model="state.title" />
     <input v-model="state.description" />
-    <UiButton class="todo-mutation__btn">Send</UiButton>
+    <button class="todo-mutation__btn">Send</button>
 </form>
 ```
