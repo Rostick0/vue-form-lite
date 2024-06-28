@@ -1,5 +1,5 @@
-import { ref, watch, computed } from "vue";
-import { IMyForm, IValid, TypeErrors } from "./types";
+import { ref, watch, computed, type UnwrapRef } from "vue";
+import type { IMyForm, IValid, TypeErrors } from "./types";
 
 const debounce = (fn: Function, ms = 200) => {
   let timeoutId: ReturnType<typeof setTimeout>;
@@ -10,15 +10,9 @@ const debounce = (fn: Function, ms = 200) => {
   };
 };
 
-const isEmpty = (obj: object) => {
-  if (Object.keys(obj).length > 0) {
-    return false;
-  }
+const isEmpty = (obj: object) => (Object.keys(obj).length > 0 ? false : true);
 
-  return true;
-};
-
-export default <T extends { [key in keyof any]: any }>({
+export default <T extends { [key in string]: any }>({
   state,
   rules,
   debounceMs,
@@ -29,6 +23,29 @@ export default <T extends { [key in keyof any]: any }>({
 
   const errors = ref<TypeErrors>({});
 
+  const setError = (field: keyof T, err: string) => {
+    errors.value[field as keyof TypeErrors] = err;
+  };
+
+  const setErrors = (errs: TypeErrors) => {
+    errors.value = {
+      ...(errors.value as object),
+      ...errs,
+    } as UnwrapRef<TypeErrors>;
+  };
+
+  const clearError = (field: keyof T) => {
+    const fieldType = field as keyof TypeErrors;
+
+    if (errors.value?.[fieldType]) {
+      delete errors.value[fieldType];
+    }
+  };
+
+  const clearErrors = () => {
+    errors.value = {};
+  };
+
   const handleSubmit = (
     successFunction: Function,
     errorFunction?: Function
@@ -36,7 +53,7 @@ export default <T extends { [key in keyof any]: any }>({
     return async (e: Event): Promise<void> => {
       e.preventDefault();
 
-      if (isEmpty(errors.value)) {
+      if (isEmpty(errors.value as object)) {
         successFunction(state.value);
         return;
       }
@@ -46,7 +63,7 @@ export default <T extends { [key in keyof any]: any }>({
   };
 
   const $valid = computed(() => ({
-    valid,
+    ...valid.value,
     errors: errors.value,
   }));
 
@@ -73,6 +90,10 @@ export default <T extends { [key in keyof any]: any }>({
   return {
     $valid,
     errors,
+    setError,
+    setErrors,
+    clearError,
+    clearErrors,
     handleSubmit,
   };
 };
