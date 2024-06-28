@@ -1,4 +1,4 @@
-This lib for vue3
+This library is for vue3
 
 **Example init script**
 
@@ -17,11 +17,12 @@ const state = ref<IPost>({
   description: null,
 });
 
+// init form
 const { handleSubmit } = formLite({
   state,
 });
 
-// handle for get values
+// handle for getting validated values
 const onSubmit = handleSubmit(async (val: IPost) => {
   // values in form
   console.log(val);
@@ -36,4 +37,35 @@ const onSubmit = handleSubmit(async (val: IPost) => {
     <input v-model="state.description" />
     <button class="todo-mutation__btn">Send</button>
 </form>
+```
+
+**Errors validate**
+
+```sh
+const state = ref<IPost>({
+  title: null,
+  description: null,
+});
+
+const {
+  errors,
+  setError,
+  setErrors,
+  clearError,
+  clearErrors,
+} = formLite({
+  state,
+});
+
+// Set error for one field
+setError("title", "This field has an error");
+// for multiple fields or all
+setErrors({
+  description: "Incorrect description",
+});
+
+// clear error for one field
+clearError("title");
+// clear all errors
+clearErrors();
 ```

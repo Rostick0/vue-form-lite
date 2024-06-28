@@ -1,11 +1,21 @@
 {
   "name": "vue-form-lite",
   "private": false,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/index.mjs",
   "types": "dist/index.mts",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rostick0/vue-form-lite"
+  },
+  "keywords": [
+    "vue",
+    "form",
+    "validation",
+    "inputs"
+  ],
   "dependencies": {
     "vue": "^3.4.29"
   },
