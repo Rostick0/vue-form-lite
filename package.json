@@ -1,10 +1,10 @@
 {
   "name": "vue-form-lite",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "dist/index.mjs",
-  "types": "dist/index.mts",
+  "types": "src/index.ts",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,18 +17,30 @@
     "inputs"
   ],
   "dependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.18.0",
+    "rollup-plugin-copy": "^3.5.0",
     "vue": "^3.4.29"
   },
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.mts",
+        "types": "./src/index.ts",
         "default": "./dist/index.mjs"
       }
     },
     "./*": "./*"
   },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "dev": "npm build --watch"
+  },
   "devDependencies": {
+    "tslib": "^2.6.3",
     "typescript": "^5.2.2",
     "vue-tsc": "^2.0.21"
   }

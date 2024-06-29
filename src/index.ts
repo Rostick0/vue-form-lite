@@ -1,16 +1,6 @@
-import { ref, watch, computed, type UnwrapRef } from "vue";
+import { ref, watch, computed } from "vue";
 import type { IMyForm, IValid, TypeErrors } from "./types";
-
-const debounce = (fn: Function, ms = 200) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-
-  return function (this: any, ...args: any[]) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
-  };
-};
-
-const isEmpty = (obj: object) => (Object.keys(obj).length > 0 ? false : true);
+import { isEmpty, debounce } from "./utils";
 
 export default <T extends { [key in string]: any }>({
   state,
@@ -29,9 +19,9 @@ export default <T extends { [key in string]: any }>({
 
   const setErrors = (errs: TypeErrors) => {
     errors.value = {
-      ...(errors.value as object),
+      ...errors.value,
       ...errs,
-    } as UnwrapRef<TypeErrors>;
+    };
   };
 
   const clearError = (field: keyof T) => {
@@ -53,7 +43,7 @@ export default <T extends { [key in string]: any }>({
     return async (e: Event): Promise<void> => {
       e.preventDefault();
 
-      if (isEmpty(errors.value as object)) {
+      if (isEmpty(errors.value)) {
         successFunction(state.value);
         return;
       }

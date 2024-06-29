@@ -1,3 +1,7 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -2873,4 +2877,4 @@ var index = (function (_a) {
     };
 });
 
-export { index as default };
+exports.default = index;
