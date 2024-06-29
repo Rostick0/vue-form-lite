@@ -1,5 +1,5 @@
 import terser from "@rollup/plugin-terser";
-import resolve from "@rollup/plugin-node-resolve";
+// import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import { babel } from "@rollup/plugin-babel";
 import copy from "rollup-plugin-copy";
@@ -11,10 +11,10 @@ function generateOutputConfig(fileName = "index") {
       file: `dist/${fileName}.mjs`,
       format: "es",
     },
-    cjs: {
-      file: `dist/${fileName}.cjs`,
-      format: "cjs",
-    },
+    // cjs: {
+    //   file: `dist/${fileName}.cjs`,
+    //   format: "cjs",
+    // },
     global: {
       file: `dist/${fileName}.iife.min.js`,
       format: "iife",
@@ -34,7 +34,7 @@ function generateConfigFactory({
   const config = {
     input,
     plugins: [
-      resolve(),
+      // resolve(),
       commonjs(),
       babel({ babelHelpers: "bundled" }),
       tsPlugin(),

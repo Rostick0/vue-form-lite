@@ -1,7 +1,7 @@
 {
   "name": "vue-form-lite",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.7",
   "type": "module",
   "main": "dist/index.mjs",
   "types": "src/index.ts",
@@ -36,8 +36,7 @@
     "./*": "./*"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "dev": "npm build --watch"
+    "build": "rollup -c rollup.config.js"
   },
   "devDependencies": {
     "tslib": "^2.6.3",
