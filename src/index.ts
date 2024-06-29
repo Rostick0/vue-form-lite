@@ -1,82 +1,82 @@
 import { ref, watch, computed } from "vue";
+import type { IMyForm, IValid, TypeErrors } from "./types";
 import { isEmpty, debounce } from "./utils";
-export default ({ state, rules, debounceMs }) => {
-  const valid = ref({
+
+export default <T extends { [key in string]: any }>({
+  state,
+  rules,
+  debounceMs,
+}: IMyForm<T>) => {
+  const valid = ref<IValid>({
     touched: false,
   });
-  const errors = ref({});
-  const setError = (field, err) => {
-    errors.value[field] = err;
+
+  const errors = ref<TypeErrors>({});
+
+  const setError = (field: keyof T, err: string) => {
+    errors.value[field as keyof TypeErrors] = err;
   };
-  const setErrors = (errs) => {
+
+  const setErrors = (errs: TypeErrors) => {
     errors.value = {
       ...errors.value,
       ...errs,
     };
   };
-  const clearError = (field) => {
-    var _a;
-    const fieldType = field;
-    if (
-      (_a = errors.value) === null || _a === void 0 ? void 0 : _a[fieldType]
-    ) {
+
+  const clearError = (field: keyof T) => {
+    const fieldType = field as keyof TypeErrors;
+
+    if (errors.value?.[fieldType]) {
       delete errors.value[fieldType];
     }
   };
+
   const clearErrors = () => {
     errors.value = {};
   };
-  const handleSubmit = (successFunction, errorFunction) => {
-    return async (e) => {
+
+  const handleSubmit = (
+    successFunction: Function,
+    errorFunction?: Function
+  ) => {
+    return (e: Event): void => {
       e.preventDefault();
+
       if (isEmpty(errors.value)) {
         successFunction(state.value);
         return;
       }
-      errorFunction === null || errorFunction === void 0
-        ? void 0
-        : errorFunction(state.value, errors);
+
+      errorFunction?.(state.value, errors);
     };
   };
+
   const $valid = computed(() => ({
     ...valid.value,
     errors: errors.value,
   }));
+
   for (const stateItem of Object.keys(state.value)) {
     const a = watch(
       () => state.value[stateItem],
-      debounce((newV) => {
-        var _a, _b, _c;
-        if (
-          (rules === null || rules === void 0 ? void 0 : rules[stateItem]) &&
-          !isEmpty(
-            rules === null || rules === void 0 ? void 0 : rules[stateItem]
-          )
-        ) {
-          if (
-            (_a = errors.value) === null || _a === void 0
-              ? void 0
-              : _a[stateItem]
-          ) {
+      debounce((newV: any) => {
+        if (rules?.[stateItem] && !isEmpty(rules?.[stateItem] as object)) {
+          if (errors.value?.[stateItem]) {
             delete errors.value[stateItem];
           }
-          for (const rule of Object.keys(rules[stateItem])) {
-            if (
-              (_b = errors.value) === null || _b === void 0
-                ? void 0
-                : _b[state.value[stateItem]]
-            )
-              return;
-            const ruleFunct =
-              (_c = rules[stateItem]) === null || _c === void 0
-                ? void 0
-                : _c[rule](newV);
+
+          for (const rule of Object.keys(rules[stateItem] as object)) {
+            if (errors.value?.[state.value[stateItem]]) return;
+
+            const ruleFunct = rules[stateItem]?.[rule](newV);
             if (ruleFunct !== true) errors.value[stateItem] = ruleFunct;
           }
         }
       }, debounceMs)
     );
   }
+
   return {
     $valid,
     errors,
