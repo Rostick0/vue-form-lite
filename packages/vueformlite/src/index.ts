@@ -58,14 +58,14 @@ export default <T extends { [key in string]: any }>({
   }));
 
   for (const stateItem of Object.keys(state.value)) {
-    const a = watch(
+    watch(
       () => state.value[stateItem],
       debounce((newV: any) => {
-        if (rules?.[stateItem] && !isEmpty(rules?.[stateItem] as object)) {
-          if (errors.value?.[stateItem]) {
-            delete errors.value[stateItem];
-          }
+        if (errors.value?.[stateItem] !== undefined) {
+          delete errors.value[stateItem];
+        }
 
+        if (rules?.[stateItem] && !isEmpty(rules?.[stateItem] as object)) {
           for (const rule of Object.keys(rules[stateItem] as object)) {
             if (errors.value?.[state.value[stateItem]]) return;
 

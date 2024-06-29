@@ -1,7 +1,7 @@
 {
   "name": "vue-form-lite",
   "private": false,
-  "version": "0.1.10",
+  "version": "0.1.12",
   "type": "module",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -17,7 +17,6 @@
     "inputs"
   ],
   "dependencies": {
-    "@types/node": "^20.14.9",
     "vue": "^3.4.29"
   },
   "exports": {
@@ -30,13 +29,8 @@
     "./*": "./*"
   },
   "scripts": {
-    "build": "gulp build"
   },
   "devDependencies": {
-    "gulp": "^5.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "gulp-uglify": "^3.0.2",
     "tslib": "^2.6.3",
     "typescript": "^5.2.2",
     "vue-tsc": "^2.0.21"
