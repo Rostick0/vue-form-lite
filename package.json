@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.1.7",
   "type": "module",
-  "main": "dist/index.mjs",
+  "main": "dist/index.js",
   "types": "src/index.ts",
   "license": "MIT",
   "repository": {

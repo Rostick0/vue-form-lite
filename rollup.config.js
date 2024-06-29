@@ -8,7 +8,7 @@ import tsPlugin from "@rollup/plugin-typescript";
 function generateOutputConfig(fileName = "index") {
   return {
     mjs: {
-      file: `dist/${fileName}.mjs`,
+      file: `dist/${fileName}.js`,
       format: "es",
     },
     // cjs: {
