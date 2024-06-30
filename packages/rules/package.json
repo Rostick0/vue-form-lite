@@ -1,5 +1,5 @@
 {
-  "name": "vue-form-lite/rules",
+  "name": "@vue-form-lite/rules",
   "private": false,
   "version": "0.0.1",
   "type": "module",

@@ -1,4 +1,4 @@
-import { isEmpty, isObject } from "../utils";
+import { isEmpty, isObject } from "./utils";
 
 export default (val: any) => {
   let empty = false;
