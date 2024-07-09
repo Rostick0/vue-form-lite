@@ -47,7 +47,6 @@ export default <T extends { [key in string]: any }>({
 
         const ruleFunct = rules[stateItem]?.[rule](value, stateItem);
 
-        console.log(ruleFunct);
         if (ruleFunct !== true) {
           errors.value[stateItem] =
             typeof ruleFunct === "string"

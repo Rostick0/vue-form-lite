@@ -1,5 +1,3 @@
-import { isEmpty, isObject } from "./utils";
-
 export default (val: any, field: string) => {
   let state = true;
 
@@ -9,8 +7,6 @@ export default (val: any, field: string) => {
     state = false;
   } else if ([undefined, null].findIndex((el) => val === el) !== -1) {
     state = false;
-  } else if (isObject(val)) {
-    state = !isEmpty(val);
   }
 
   return state ? true : `The ${field} field is required`;

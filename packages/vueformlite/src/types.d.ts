@@ -7,7 +7,7 @@ export type typeRuleItem = {
 export interface IMyForm<T> {
   state: T | Ref<T> | ToRefs<T>;
   rules?: {
-    [key in string]?: typeRuleItem;
+    [key in keyof T]?: typeRuleItem;
   };
   debounceMs?: number;
 }
