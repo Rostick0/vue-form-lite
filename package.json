@@ -31,10 +31,16 @@
   },
   "scripts": {
     "build": "gulp build",
-    "dev": "vite"
+    "dev": "vite",
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
     "@vitejs/plugin-vue": "^5.0.5",
+    "babel-jest": "^29.7.0",
     "gulp": "^5.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
