@@ -1,4 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+// import {
+//   setMessageRule,
+//   setValidate,
+// } from "../packages/vueformlite/src/config";
+// import { required } from "../packages/rules/src";
 
-createApp(App).mount('#app')
+// setMessageRule("required", "The {field} required");
+// setValidate("required", required);
+
+createApp(App).mount("#app");

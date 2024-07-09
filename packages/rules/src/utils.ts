@@ -3,5 +3,3 @@ export const isEmpty = (obj: object) =>
 
 export const isObject = (x: any) =>
   typeof x === "object" && !Array.isArray(x) && x !== null;
-
-export const withMessage = (message: string) => message;

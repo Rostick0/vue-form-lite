@@ -36,12 +36,38 @@ export default <T extends { [key in string]: any }>({
     errors.value = {};
   };
 
+  const validValues = (stateItem: string, value: string) => {
+    if (errors.value?.[stateItem] !== undefined) {
+      delete errors.value[stateItem];
+    }
+
+    if (rules?.[stateItem] && !isEmpty(rules?.[stateItem] as object)) {
+      for (const rule of Object.keys(rules[stateItem] as object)) {
+        if (errors.value?.[state.value[stateItem]]) return;
+
+        const ruleFunct = rules[stateItem]?.[rule](value, stateItem);
+
+        console.log(ruleFunct);
+        if (ruleFunct !== true) {
+          errors.value[stateItem] =
+            typeof ruleFunct === "string"
+              ? ruleFunct
+              : `The field ${stateItem} is invalid`;
+        }
+      }
+    }
+  };
+
   const handleSubmit = (
     successFunction: Function,
     errorFunction?: Function
   ) => {
     return (e: Event): void => {
       e.preventDefault();
+
+      for (const stateItem of Object.keys(state.value)) {
+        validValues(stateItem, state.value[stateItem]);
+      }
 
       if (isEmpty(errors.value)) {
         successFunction(state.value);
@@ -60,19 +86,10 @@ export default <T extends { [key in string]: any }>({
   for (const stateItem of Object.keys(state.value)) {
     watch(
       () => state.value[stateItem],
-      debounce((newV: any) => {
-        if (errors.value?.[stateItem] !== undefined) {
-          delete errors.value[stateItem];
-        }
+      debounce(function (newV: any) {
+        if (valid.value.touched === false) valid.value.touched = true;
 
-        if (rules?.[stateItem] && !isEmpty(rules?.[stateItem] as object)) {
-          for (const rule of Object.keys(rules[stateItem] as object)) {
-            if (errors.value?.[state.value[stateItem]]) return;
-
-            const ruleFunct = rules[stateItem]?.[rule](newV);
-            if (ruleFunct !== true) errors.value[stateItem] = ruleFunct;
-          }
-        }
+        validValues(stateItem, newV);
       }, debounceMs)
     );
   }
