@@ -8,16 +8,19 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rostick0/vue-form-lite"
+    "url": "git+https://github.com/Rostick0/vue-form-lite.git",
+    "directory": "packages/rules"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "vue",
-    "form",
     "validation",
-    "inputs"
+    "rules"
   ],
   "dependencies": {
-    "vue": "^3.4.29"
+    "vue-form-lite": "^0.2.0"
   },
   "exports": {
     ".": {
@@ -27,17 +30,5 @@
       }
     },
     "./*": "./*"
-  },
-  "scripts": {
-    "build": "gulp build"
-  },
-  "devDependencies": {
-    "gulp": "^5.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "gulp-uglify": "^3.0.2",
-    "tslib": "^2.6.3",
-    "typescript": "^5.2.2",
-    "vue-tsc": "^2.0.21"
   }
 }

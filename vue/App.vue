@@ -14,7 +14,7 @@ import { ref } from "vue";
 import formLite from "../packages/vueformlite/src";
 import required from "../packages/rules/src/required";
 import min from "../packages/rules/src/min";
-import { between } from "../packages/rules/src";
+import { between, minLength } from "../packages/rules/src";
 
 interface IPost {
   title?: string | null;
@@ -32,13 +32,17 @@ const state = ref<IPost>({
 
 // const requiredCUstom = (val: any) => !val;
 
+const checkSuper = (val: any) => (val === "super" ? true : "It's not super");
+
 const { handleSubmit, errors, $valid } = formLite({
   state,
   rules: {
     title: {
       required,
-      // min: min(20),
-      between: between(10, 30)
+      // custom rule
+      checkSuper,
+      // Some functions require arguments to be specified
+      minLength: minLength(4),
     },
   },
 });

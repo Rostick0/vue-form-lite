@@ -22,4 +22,23 @@ function vueFormLite() {
   // .pipe(dest("app/js/concat/"));
 }
 
-exports.build = series(vueFormLite);
+function rules() {
+  return src(["packages/rules/src/*.ts"])
+    .pipe(
+      ts({
+        noImplicitAny: true,
+        target: "es2020",
+      })
+    )
+    .pipe(dest("packages/rules/dist"));
+
+  // .pipe(
+  //   babel({
+  //     presets: ["@babel/env"],
+  //   })
+  // )
+  // .pipe(uglify());
+  // .pipe(dest("app/js/concat/"));
+}
+
+exports.build = series(vueFormLite, rules);
