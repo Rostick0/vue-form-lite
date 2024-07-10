@@ -11,10 +11,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import formLite from "../packages/vueformlite/src";
-import required from "../packages/rules/src/required";
-import min from "../packages/rules/src/min";
-import { between, minLength } from "../packages/rules/src";
+import formLite from "../packages/vueformlite";
+import { between, minLength, min, required } from "../packages/rules/src/index";
 
 interface IPost {
   title?: string | null;

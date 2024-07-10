@@ -8,7 +8,9 @@ function vueFormLite() {
     .pipe(
       ts({
         noImplicitAny: true,
-        target: "es2020",
+        target: "es2017",
+        declaration: true,
+        module: "commonjs"
       })
     )
     .pipe(dest("packages/vueformlite/dist"));
@@ -19,7 +21,6 @@ function vueFormLite() {
   //   })
   // )
   // .pipe(uglify());
-  // .pipe(dest("app/js/concat/"));
 }
 
 function rules() {
@@ -27,18 +28,12 @@ function rules() {
     .pipe(
       ts({
         noImplicitAny: true,
-        target: "es2020",
+        target: "es2017",
+        declaration: true,
+        module: "commonjs"
       })
     )
     .pipe(dest("packages/rules/dist"));
-
-  // .pipe(
-  //   babel({
-  //     presets: ["@babel/env"],
-  //   })
-  // )
-  // .pipe(uglify());
-  // .pipe(dest("app/js/concat/"));
 }
 
 exports.build = series(vueFormLite, rules);
