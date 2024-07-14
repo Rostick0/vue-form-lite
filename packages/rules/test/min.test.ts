@@ -1,5 +1,5 @@
 import { expect, test } from "@jest/globals";
-import min from "../../packages/rules/src/min";
+import min from "../src/min";
 
 const field = "price";
 const val = 1;

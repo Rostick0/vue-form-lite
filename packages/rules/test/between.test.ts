@@ -1,5 +1,5 @@
 import { expect, test } from "@jest/globals";
-import between from "../../packages/rules/src/between";
+import between from "../src/between";
 
 const field = "field";
 const min = 1;

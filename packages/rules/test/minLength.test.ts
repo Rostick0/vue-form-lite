@@ -1,5 +1,5 @@
 import { expect, test } from "@jest/globals";
-import minLength from "../../packages/rules/src/minLength";
+import minLength from "../src/minLength";
 
 const field = "price";
 const val = 10;

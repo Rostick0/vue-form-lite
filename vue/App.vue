@@ -5,24 +5,46 @@
   <form class="todo-mutation" @submit="onSubmit" method="post">
     <input v-model="state.title" />
     <input v-model="state.description" />
+    <input @change="(e) => (state.img = onChangeFile(e))" type="file" />
     <button class="todo-mutation__btn">Send</button>
   </form>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
+// import formLite from "../packages/vueformlite";
 import formLite from "../packages/vueformlite";
-import { between, minLength, min, required } from "../packages/rules/src/index";
+import {
+  between,
+  minLength,
+  min,
+  required,
+  image,
+} from "../packages/rules/src/";
+import { watch } from "fs";
 
 interface IPost {
   title?: string | null;
   description: string | null;
+  img?: any;
 }
+
+//file();
+
+const onChangeFile = (e: Event) => {
+  console.log(e.target?.files)
+  return (e.target as HTMLInputElement).files;
+};
 
 const state = ref<IPost>({
   title: undefined,
   description: null,
+  img: null,
 });
+
+// watch(() => state.value.img, (newV: any) => {
+//   console.log(newV);
+// });
 
 // const aboba = (a: any) => {
 //   return (val: any) => (val ? true : "Абоба");
@@ -41,6 +63,9 @@ const { handleSubmit, errors, $valid } = formLite({
       checkSuper,
       // Some functions require arguments to be specified
       minLength: minLength(4),
+    },
+    img: {
+      image: image,
     },
   },
 });

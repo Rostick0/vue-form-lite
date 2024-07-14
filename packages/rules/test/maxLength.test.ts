@@ -1,5 +1,5 @@
 import { expect, test } from "@jest/globals";
-import maxLength from "../../packages/rules/src/maxLength";
+import maxLength from "../src/maxLength";
 
 const field = "price";
 const val = 10;

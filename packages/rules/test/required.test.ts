@@ -1,5 +1,5 @@
 import { expect, test } from "@jest/globals";
-import required from "../../packages/rules/src/required";
+import required from "../src/required";
 
 const field = "field";
 const message = `The ${field} field is required`;

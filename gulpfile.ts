@@ -10,7 +10,6 @@ function vueFormLite() {
         noImplicitAny: true,
         target: "es2017",
         declaration: true,
-        module: "commonjs"
       })
     )
     .pipe(dest("packages/vueformlite/dist"));
@@ -30,10 +29,10 @@ function rules() {
         noImplicitAny: true,
         target: "es2017",
         declaration: true,
-        module: "commonjs"
       })
     )
     .pipe(dest("packages/rules/dist"));
 }
 
-exports.build = series(vueFormLite, rules);
+// vueFormLite
+exports.build = series( rules);
