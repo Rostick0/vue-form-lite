@@ -1,3 +1,5 @@
+import { interpolate, ruleMessages } from "./config";
+
 export default (val: any, field: string) => {
   let state = true;
 
@@ -9,5 +11,5 @@ export default (val: any, field: string) => {
     state = false;
   }
 
-  return state ? true : `The ${field} field is required`;
+  return state ? true : interpolate(ruleMessages.required, { field });
 };

@@ -8,6 +8,7 @@ import email from "./email";
 import contains from "./contains";
 import mimes from "./mimes";
 import image from "./image";
+import numeric from "./numeric";
 
 export {
   required,
@@ -20,4 +21,5 @@ export {
   contains,
   mimes,
   image,
+  numeric,
 };

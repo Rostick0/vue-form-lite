@@ -1,3 +1,5 @@
+import { interpolate, ruleMessages } from "./config";
+
 type typeArgumentMines = string | Array<string>;
 
 const isMimesString = (mimes: typeArgumentMines) => typeof mimes === "string";
@@ -15,9 +17,11 @@ export default (mimes: typeArgumentMines) => (val: FileList, field: string) => {
   for (let i = 0; i < val.length; i++) {
     const file = val[i];
     if (!checkMimes(mimes, file?.type)) {
-      return `The ${field} must be a file of ${
-        isMimesString(mimes) ? mimes : mimes?.join(", ")
-      } - '${file?.name}'`;
+      return interpolate(ruleMessages.mimes, {
+        field,
+        minesString: isMimesString(mimes) ? mimes : mimes?.join(", "),
+        fileName: file?.name,
+      });
     }
   }
 

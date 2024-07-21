@@ -1,4 +1,6 @@
+import { interpolate, ruleMessages } from "./config";
+
 export default (min: number) => (val: string, field: string) =>
   val?.trim()?.length < min
-    ? `The ${field} must be at least ${min} characters`
+    ? interpolate(ruleMessages.minLength, { field, min })
     : true;
