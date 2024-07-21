@@ -14,14 +14,11 @@
 import { ref } from "vue";
 // import formLite from "../packages/vueformlite";
 import formLite from "../packages/vueformlite";
-import {
-  between,
-  minLength,
-  min,
-  required,
-  image,
-} from "../packages/rules/src/";
-import { watch } from "fs";
+import { between, minLength, min, required, image } from "../packages/rules";
+import { setRuleMesaage } from "../packages/rules/dist/config";
+
+// setRuleMesaage("required", "{field} is required");
+// console.log(ruleMessages["required"] = 'Поле важно');
 
 interface IPost {
   title?: string | null;
@@ -32,7 +29,7 @@ interface IPost {
 //file();
 
 const onChangeFile = (e: Event) => {
-  console.log(e.target?.files)
+  console.log(e.target?.files);
   return (e.target as HTMLInputElement).files;
 };
 
@@ -58,11 +55,11 @@ const { handleSubmit, errors, $valid } = formLite({
   state,
   rules: {
     title: {
-      required,
       // custom rule
       checkSuper,
       // Some functions require arguments to be specified
       minLength: minLength(4),
+      required,
     },
     img: {
       image: image,

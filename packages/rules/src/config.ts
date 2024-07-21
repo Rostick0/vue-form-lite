@@ -33,4 +33,5 @@ export const ruleMessages: Record<string, string> = {
   numeric: "The {field} must be a number",
 };
 
-// export const setRuleMesaage = (rule: string, message: string)
+export const setRuleMesaage = (rule: string, message: string) =>
+  (ruleMessages[rule] = message);
